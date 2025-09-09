@@ -18,7 +18,7 @@ cd dev-env
 docker compose build
 ```
 
-as a result we will have image named `dev-env-asm32`
+as a result we will have image named `dev-env-assembly-asm32`
 
 ### 4. docker look for image built
 
@@ -27,7 +27,8 @@ docker image ls
 ```
 
 ```terminaloutput
-dev-env-asm32         latest     feac1f563065   3 weeks ago     514MB
+REPOSITORY                        TAG        IMAGE ID       CREATED         SIZE
+dev-env-assembly-asm32            latest     96b11ec93b94   3 weeks ago     514MB
 ```
 
 ### 5. start container
@@ -48,8 +49,8 @@ docker ps
 ```
 
 ```terminaloutput
-CONTAINER ID   IMAGE             COMMAND            CREATED          STATUS          PORTS     NAMES
-4156caae1a1e   dev-env-asm32     "sleep infinity"   22 seconds ago   Up 21 seconds             dev-env-asm32-1
+CONTAINER ID   IMAGE                    COMMAND            CREATED         STATUS         PORTS     NAMES
+2533aacc08d1   dev-env-assembly-asm32   "sleep infinity"   9 seconds ago   Up 9 seconds             dev-env-asm32-1
 ```
 
 ### 7. jump into docker container
@@ -124,7 +125,7 @@ exit
 docker stop dev-env-asm32-1
 ```
 
-### 11. remove unused docker container (in the end of the course)
+### 11. remove unused docker image (in the end of the course)
 ```shell
-docker image rm dev-env-asm32 --force
+docker ps -a --filter "ancestor=dev-env-assembly-asm32" -q | xargs -r docker rm -f && docker rmi -f dev-env-assembly-asm32
 ```
